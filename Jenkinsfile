@@ -2,13 +2,12 @@ pipeline {
 
     agent any
 
-    stages {
+    tools {
+        jdk 'JDK-21'
+        maven 'Maven-3.9.14'
+    }
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+    stages {
 
         stage('Run Tests') {
             steps {
@@ -18,11 +17,9 @@ pipeline {
     }
 
     post {
-
         always {
             archiveArtifacts artifacts: 'test-output/**/*',
             allowEmptyArchive: true
         }
-
     }
 }
