@@ -6,6 +6,9 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 import report.ExtentReportManager;
 import report.ExtentTestManager;
+import factory.DriverFactory;
+import utilities.ScreenshotUtility;
+import org.openqa.selenium.WebDriver;
 
 public class ExtentReportListener implements ITestListener {
 
@@ -38,6 +41,16 @@ public class ExtentReportListener implements ITestListener {
 
         ExtentTestManager.getTest()
                 .log(Status.FAIL, result.getThrowable());
+
+        WebDriver driver=DriverFactory.getDriver();
+
+        //capture screenshot
+        String screenshotPath=ScreenshotUtility.captureScreenshot(driver,result.getMethod().getMethodName());
+
+        if (screenshotPath != null) {
+
+            ExtentTestManager.getTest().addScreenCaptureFromPath(screenshotPath);
+        }
     }
 
     @Override

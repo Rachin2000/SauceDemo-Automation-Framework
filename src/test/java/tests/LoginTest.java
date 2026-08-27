@@ -92,4 +92,5 @@ public void verifyValidLogin(String username,String password,String expectedResu
     //Assert.assertTrue(driver.getCurrentUrl().contains("/inventory.html"), "user did not login");
 
 }
+
 }
